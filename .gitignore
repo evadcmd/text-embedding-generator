@@ -1,0 +1,19 @@
+# python generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# venv
+.venv
+
+# language model
+multilingual-e5-large/
+
+# pytest
+.coverage
+.pytest_cache
+
+.DS_Store
