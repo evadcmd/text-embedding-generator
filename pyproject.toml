@@ -34,4 +34,4 @@ packages = ["src/teg"]
 
 [tool.rye.scripts]
 dev = { cmd = ["uvicorn", "teg.main:api", "--reload"] }
-test = { cmd = ["pytest", "--cov", "./src/"] }
+test = { cmd = ["pytest", "--cov", "./src/teg/"] }
