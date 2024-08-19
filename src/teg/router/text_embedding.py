@@ -2,8 +2,11 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from teg import embedding
+from teg.router import API_V1
 
-router = APIRouter(prefix="/text-embedding", tags=["text embedding generator API"])
+router = APIRouter(
+    prefix=API_V1 + "/text-embedding", tags=["text embedding generator API"]
+)
 
 
 class Text(BaseModel):
