@@ -1,6 +1,7 @@
 import torch.nn.functional as F
 from torch import Tensor
 from transformers import AutoModel, AutoTokenizer
+from teg import device
 
 
 def average_pool(last_hidden_states: Tensor, attention_mask: Tensor) -> Tensor:
@@ -9,7 +10,7 @@ def average_pool(last_hidden_states: Tensor, attention_mask: Tensor) -> Tensor:
 
 
 tokenizer = AutoTokenizer.from_pretrained("./multilingual-e5-large")
-model = AutoModel.from_pretrained("./multilingual-e5-large")
+model = AutoModel.from_pretrained("./multilingual-e5-large").to(device)
 
 
 # Each input text should start with "query: " or "passage: ", even for non-English texts.
@@ -21,7 +22,7 @@ def _gen(text: str) -> list[float]:
         padding=True,
         truncation=True,
         return_tensors="pt",
-    )
+    ).to(device)
 
     outputs = model(**batch_dict)
     embeddings = F.normalize(
