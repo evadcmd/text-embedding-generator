@@ -2,15 +2,13 @@
 name = "teg"
 version = "0.1.0"
 description = "Add your description here"
-authors = [
-    { name = "TATA", email = "evadcmd@gmail.com" }
-]
+authors = [{ name = "TATA", email = "evadcmd@gmail.com" }]
 dependencies = [
-    "fastapi[all]>=0.112.1",
-    "torch>=2.4.0",
-    "transformers>=4.44.0",
-    "prometheus-fastapi-instrumentator>=7.0.0",
-    "concurrent-log-handler>=0.9.25",
+  "fastapi[all]>=0.112.1",
+  "torch>=2.4.0",
+  "transformers>=4.44.0",
+  "prometheus-fastapi-instrumentator>=7.0.0",
+  "concurrent-log-handler>=0.9.25",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
@@ -22,9 +20,9 @@ build-backend = "hatchling.build"
 [tool.rye]
 managed = true
 dev-dependencies = [
-    "pytest>=8.3.2",
-    "pytest-cov>=5.0.0",
-    "pytest-asyncio>=0.23.8",
+  "pytest>=8.3.2",
+  "pytest-cov>=5.0.0",
+  "pytest-asyncio>=0.23.8",
 ]
 
 [tool.hatch.metadata]
