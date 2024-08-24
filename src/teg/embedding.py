@@ -30,7 +30,7 @@ def _gen(text: str) -> list[float]:
         p=2,
         dim=1,
     )
-    return embeddings[0]
+    return embeddings[0].tolist()
 
 
 import asyncio
