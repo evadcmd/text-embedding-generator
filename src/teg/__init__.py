@@ -1,6 +1,7 @@
-import torch
 import logging.config
-import concurrent_log_handler  # pyright: ignore #noqa F401
+
+import concurrent_log_handler  # noqa: F401
+import torch
 
 logging.config.fileConfig("./log.conf", disable_existing_loggers=False)
 

@@ -1,6 +1,9 @@
+import asyncio
+
 import torch.nn.functional as F
 from torch import Tensor
 from transformers import AutoModel, AutoTokenizer
+
 from teg import device
 
 
@@ -31,9 +34,6 @@ def _gen(text: str) -> list[float]:
         dim=1,
     )
     return embeddings[0].tolist()
-
-
-import asyncio
 
 
 async def gen(text: str) -> list[float]:
