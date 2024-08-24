@@ -10,6 +10,7 @@ dependencies = [
     "torch>=2.4.0",
     "transformers>=4.44.0",
     "prometheus-fastapi-instrumentator>=7.0.0",
+    "concurrent-log-handler>=0.9.25",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
