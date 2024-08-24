@@ -38,3 +38,5 @@ you could also use docker compose to boot it up
 ```bash
 $ docker compose up -d
 ```
+
+swagger http://127.0.0.1:5200/docs#/
