@@ -1,19 +1,35 @@
-# python generated files
-__pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
-
-# venv
-.venv
+**/__pycache__
+**/*venv
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/bin
+**/charts
+**/docker-compose*
+**/compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+*.db
+.python-version
+LICENSE
 
 # pytest
 .coverage
 .pytest_cache
+.trunk
 
 .DS_Store
-
-# vscode settings
-.vscode/
