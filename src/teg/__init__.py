@@ -1,6 +1,6 @@
 import logging.config
 
-import concurrent_log_handler  # noqa: F401
+import concurrent_log_handler  # noqa: F401 # type: ignore
 import torch
 
 logging.config.fileConfig("./log.conf", disable_existing_loggers=False)

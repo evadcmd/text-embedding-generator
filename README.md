@@ -1,11 +1,7 @@
 # text embedding generator
 
 ```bash
-$ brew install rye
-```
-
-```bash
-$ brew install git-lfs
+$ brew install uv just git-lfs
 ```
 
 in project folder
@@ -20,14 +16,14 @@ note: https://hironsan.hatenablog.com/entry/2023/07/05/073150
 run server
 
 ```bash
-$ rye sync
-$ rye run dev
+$ uv sync
+$ just dev
 ```
 
 test
 
 ```bash
-$ rye run test
+$ just test
 ```
 
 swagger
