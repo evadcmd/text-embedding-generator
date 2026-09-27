@@ -1,5 +1,5 @@
 import asyncio
-from typing import Literal
+from enum import StrEnum
 
 import torch.nn.functional as F
 from torch import Tensor
@@ -7,7 +7,11 @@ from transformers import AutoModel, AutoTokenizer
 
 from teg import device
 
-TextType = Literal["query", "passage"]
+
+class TextType(StrEnum):
+    QUERY = "query"
+    PASSAGE = "passage"
+
 
 tokenizer = AutoTokenizer.from_pretrained("./multilingual-e5-large")
 model = AutoModel.from_pretrained("./multilingual-e5-large").to(device)
@@ -38,6 +42,6 @@ def _gen(text: str, text_type: TextType) -> list[float]:
     return embeddings[0].tolist()
 
 
-async def gen(text: str, text_type: TextType = "query") -> list[float]:
+async def gen(text: str, text_type: TextType = TextType.QUERY) -> list[float]:
     loop = asyncio.get_running_loop()
     return await loop.run_in_executor(None, _gen, text, text_type)
