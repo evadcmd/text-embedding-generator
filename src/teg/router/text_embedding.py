@@ -11,7 +11,7 @@ router = APIRouter(
 
 class Text(BaseModel):
     text: str
-    type: embedding.TextType = "query"
+    type: embedding.TextType = embedding.TextType.QUERY
 
 
 @router.post("")
