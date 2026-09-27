@@ -11,6 +11,12 @@ async def test_gen():
 
 
 @pytest.mark.asyncio
+async def test_gen_passage():
+    vec = await embedding.gen("hi", "passage")
+    assert len(vec) == 1024
+
+
+@pytest.mark.asyncio
 async def test_score():
     positive = await embedding.gen("positive")
     negative = await embedding.gen("negative")
