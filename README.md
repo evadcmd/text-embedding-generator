@@ -34,3 +34,10 @@ $ docker compose up -d
 ```
 
 swagger http://127.0.0.1:5200/docs#/
+
+## configuration
+
+- `TEG_MODEL_PATH`: path (local dir or HF hub id) to the sentence-transformers
+  model to load. Defaults to `./Qwen3-Embedding-0.6B`. Query `GET
+  /api/v1/text-embedding/model-info` at runtime to check which model/dim is
+  currently loaded.
