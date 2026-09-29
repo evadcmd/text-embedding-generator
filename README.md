@@ -8,10 +8,8 @@ in project folder
 
 ```bash
 $ git lfs install
-$ git clone https://huggingface.co/intfloat/multilingual-e5-large
+$ git clone https://huggingface.co/Qwen/Qwen3-Embedding-0.6B
 ```
-
-note: https://hironsan.hatenablog.com/entry/2023/07/05/073150
 
 run server
 
