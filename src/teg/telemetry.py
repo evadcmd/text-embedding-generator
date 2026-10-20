@@ -5,14 +5,7 @@ Read from environment variables (standard SDK behavior):
   OTEL_SERVICE_NAME              -> resource's service.name
   OTEL_RESOURCE_ATTRIBUTES       -> other resource attributes
   OTEL_EXPORTER_OTLP_ENDPOINT    -> e.g. http://lgtm:4318 (the exporter appends paths like /v1/traces itself)
-
-Without OTEL_EXPORTER_OTLP_ENDPOINT nothing is set up, so `just dev` and a
-plain `docker compose up` without an LGTM stack don't keep retrying exports
-to localhost:4318.
 """
-
-import logging
-import os
 
 from fastapi import FastAPI
 from opentelemetry import metrics, trace
@@ -30,18 +23,8 @@ from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
-logger = logging.getLogger(__name__)
-
-
-def enabled() -> bool:
-    return bool(os.environ.get("OTEL_EXPORTER_OTLP_ENDPOINT"))
-
 
 def setup() -> None:
-    if not enabled():
-        logger.info("OTEL_EXPORTER_OTLP_ENDPOINT is not set, OTel export is off")
-        return
-
     # Resource.create() automatically merges OTEL_SERVICE_NAME / OTEL_RESOURCE_ATTRIBUTES.
     resource = Resource.create()
 
@@ -63,18 +46,23 @@ def setup() -> None:
     logger_provider.add_log_record_processor(BatchLogRecordProcessor(OTLPLogExporter()))
     set_logger_provider(logger_provider)
 
-    # Attaches an OTel handler to the root logger (standard logging records ->
-    # OTel logs, with trace_id / span_id). No set_logging_format: console output
-    # keeps the format configured in teg/__init__.py.
+    # LoggingInstrumentor does two things:
+    #   1. Attaches an OTel handler to the root logger (standard logging records ->
+    #      OTel logs, with trace_id / span_id)
+    #   2. inject_trace_context=True: adds otelTraceID / otelSpanID to every record,
+    #      which log.ini's format prints ("0" outside a span). Records logged before
+    #      this runs don't have them; JsonFormatter writes null for those instead
+    #      of failing.
+    # No set_logging_format: it only adds a logging.basicConfig() call, which is a
+    # no-op once --log-config has set up root, so output keeps log.ini's format.
     # log_code_attributes=True: the handler drops funcName / lineno / pathname,
     # so send them as code.function.name / code.line.number / code.file.path.
-    LoggingInstrumentor().instrument(log_code_attributes=True)
-    logger.info("OTel export is on: %s", os.environ["OTEL_EXPORTER_OTLP_ENDPOINT"])
+    LoggingInstrumentor().instrument(
+        inject_trace_context=True, log_code_attributes=True
+    )
 
 
 def instrument_app(app: FastAPI) -> None:
-    if not enabled():
-        return
     # Inbound HTTP: one server span per request, linked to the caller's trace
     # (e.g. taruza) via the traceparent header.
     # healthz / metrics are polled, so they'd only add noise.
