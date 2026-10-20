@@ -3,8 +3,6 @@
 services:
   teg-api:
     networks: [default, lgtm-net]
-    environment:
-      OTEL_EXPORTER_OTLP_ENDPOINT: http://lgtm:4318
 
 networks:
   lgtm-net:
