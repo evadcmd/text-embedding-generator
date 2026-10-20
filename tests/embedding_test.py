@@ -20,12 +20,13 @@ async def test_gen_batch():
 
 @pytest.mark.asyncio
 async def test_score():
-    positive = await embedding.gen("positive")
-    negative = await embedding.gen("negative")
-    text1 = await embedding.gen("おめでとうございます！", TextType.QUERY)
+    # gen() returns plain lists; torch.inner needs tensors
+    positive = torch.tensor(await embedding.gen("positive"))
+    negative = torch.tensor(await embedding.gen("negative"))
+    text1 = torch.tensor(await embedding.gen("おめでとうございます！", TextType.QUERY))
     assert torch.inner(text1, positive) > torch.inner(text1, negative)
-    text2 = await embedding.gen(
-        "I don't think it is going to work...", TextType.QUERY
+    text2 = torch.tensor(
+        await embedding.gen("I don't think it is going to work...", TextType.QUERY)
     )
     assert torch.inner(text2, positive) < torch.inner(text2, negative)
 

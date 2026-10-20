@@ -1,0 +1,10 @@
+# Joins taruza's LGTM stack running on the same docker host:
+#   docker compose -f docker-compose.yml -f compose.lgtm-shared.yaml up -d
+services:
+  teg-api:
+    networks: [default, lgtm-net]
+
+networks:
+  lgtm-net:
+    external: true
+    name: lgtm-net

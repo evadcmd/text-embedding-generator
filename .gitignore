@@ -11,6 +11,10 @@ wheels/
 
 # language model
 multilingual-e5-large/
+Qwen3-Embedding-0.6B/
+
+# log files (log.ini)
+.log/
 
 # pytest
 .coverage
