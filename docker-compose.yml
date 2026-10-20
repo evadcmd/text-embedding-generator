@@ -7,7 +7,10 @@ services:
       - 5200:5200
     environment:
       OTEL_SERVICE_NAME: teg
-      # empty = OTel export off. Set it to an OTLP HTTP endpoint (e.g.
-      # http://<lgtm host>:4318) to send traces / metrics / logs there, or use
-      # compose.lgtm-shared.yaml when LGTM runs on the same docker host.
-      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+      # OTel export is always on. lgtm resolves when joined to lgtm-net
+      # (compose.lgtm-shared.yaml); otherwise point this at another LGTM.
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://lgtm:4318}
+    volumes:
+      # Bind mount (like taruza) so WARNING+ logs from Docker and from
+      # `just dev` end up in the same ./.log directory.
+      - ./.log:/opt/text-embedding-generator/.log
