@@ -4,7 +4,8 @@ WORKDIR ${APP_DIR}
 
 RUN pip install --no-cache-dir uv
 COPY pyproject.toml uv.lock ./
-RUN uv sync --no-cache --no-dev --frozen
+# TODO: add --frozen once uv.lock is regenerated (it's stale on main)
+RUN uv sync --no-cache --no-dev
 
 FROM python:3.13.12-slim AS server
 ENV APP_DIR=/opt/text-embedding-generator
