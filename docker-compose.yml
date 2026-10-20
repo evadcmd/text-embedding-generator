@@ -5,3 +5,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5200:5200
+    environment:
+      OTEL_SERVICE_NAME: teg
+      # empty = OTel export off. Set it to an OTLP HTTP endpoint (e.g.
+      # http://<lgtm host>:4318) to send traces / metrics / logs there, or use
+      # compose.lgtm-shared.yaml when LGTM runs on the same docker host.
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
