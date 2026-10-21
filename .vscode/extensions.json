@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "charliermarsh.ruff",
+        "meta.pyrefly",
+        "nefrob.vscode-just-syntax",
+    ],
+    "unwantedRecommendations": [
+        "ms-python.vscode-pylance",
+    ],
+}
