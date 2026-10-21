@@ -38,4 +38,4 @@ jobs:
 
       - name: pyrefly check
         if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
-        run: uv run pyrefly check --output-format=github
+        run: uv run pyrefly check --min-severity warn --output-format=github
