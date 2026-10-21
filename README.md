@@ -39,7 +39,7 @@ to send traces / metrics / logs to taruza's LGTM stack on the same docker host
 (the external `lgtm-net` network must exist)
 
 ```bash
-$ docker compose -f docker-compose.yml -f compose.lgtm-shared.yaml up -d
+$ docker compose -f compose.yaml -f compose.lgtm-shared.yaml up -d
 ```
 
 ## logging
