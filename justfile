@@ -20,3 +20,6 @@ down *args:
 
 pyrefly *args="check":
     uv run pyrefly {{ args }} --min-severity warn
+
+ruff *args="check":
+    uv run ruff {{ args }} 
