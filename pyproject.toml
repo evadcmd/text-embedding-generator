@@ -1,7 +1,7 @@
 [project]
 name = "text-embedding-generator"
 version = "0.1.0"
-description = "A simple word vec generator"
+description = "a simple demo of text embedding API"
 readme = "README.md"
 authors = [{ name = "TATA", email = "evadcmd@gmail.com" }]
 requires-python = ">=3.13"
