@@ -1,6 +1,7 @@
 import asyncio
 from enum import StrEnum
 
+from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
 
 from teg import device
@@ -12,6 +13,11 @@ model = SentenceTransformer(MODEL_PATH, device=str(device))
 class TextType(StrEnum):
     QUERY = "query"
     PASSAGE = "passage"
+
+
+class ModelInfo(BaseModel):
+    model_path: str
+    dim: int | None
 
 
 def _encode(texts: list[str], text_type: TextType) -> list[list[float]]:
@@ -31,5 +37,5 @@ async def gen(text: str, text_type: TextType = TextType.PASSAGE) -> list[float]:
     return (await gen_batch([text], text_type))[0]
 
 
-def model_info() -> dict[str, str | int]:
-    return {"model_path": MODEL_PATH, "dim": model.get_sentence_embedding_dimension()}
+def model_info() -> ModelInfo:
+    return ModelInfo(model_path=MODEL_PATH, dim=model.get_embedding_dimension())

@@ -31,5 +31,5 @@ async def text_embedding_batch(dto: TextBatch) -> list[list[float]]:
 
 
 @router.get("/model-info")
-async def model_info() -> dict[str, str | int]:
+async def model_info() -> embedding.ModelInfo:
     return embedding.model_info()

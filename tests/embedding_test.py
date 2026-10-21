@@ -33,4 +33,4 @@ async def test_score():
 
 def test_model_info():
     info = embedding.model_info()
-    assert info["dim"] == 1024
+    assert info.dim == 1024
