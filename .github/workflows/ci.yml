@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: astral-sh/setup-uv@v8.3.0
+        with:
+          enable-cache: true
+          # match the Dockerfile; torch has no wheels for the newest CPython yet
+          python-version: "3.13"
+
+      - name: Install dependencies
+        id: sync
+        run: uv sync --locked
+
+      - name: ruff format
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
+        run: uv run ruff format --check .
+
+      - name: ruff check
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
+        run: uv run ruff check --output-format=github .
+
+      - name: pyrefly check
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
+        run: uv run pyrefly check --min-severity warn --output-format=github

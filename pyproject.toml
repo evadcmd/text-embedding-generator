@@ -15,13 +15,26 @@ dependencies = [
     "opentelemetry-sdk>=1.44.0",
     "prometheus-fastapi-instrumentator>=7.1.0",
     "python-json-logger>=4.2.0",
-    "sentence-transformers>=3.0.0",
+    "sentence-transformers>=6.2.0",
     "torch>=2.11.0",
     "transformers>=5.5.0",
 ]
 
 [dependency-groups]
-dev = ["pytest>=9.0.2", "pytest-asyncio>=1.3.0", "pytest-cov>=7.1.0"]
+dev = [
+    "pyrefly>=1.4.0",
+    "pytest>=9.0.2",
+    "pytest-asyncio>=1.3.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.1",
+]
+
+[tool.ruff.lint]
+# Keep `ruff check` consistent with the editor's organize-imports on save.
+extend-select = ["I"]
+
+[tool.pyrefly]
+preset = "strict"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

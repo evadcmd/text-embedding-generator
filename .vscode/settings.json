@@ -1,6 +1,16 @@
 {
-  "[python]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "charliermarsh.ruff"
-  }
+    // Pyrefly provides language services; keep Pylance off to avoid duplicate diagnostics.
+    "python.languageServer": "None",
+    // Report type errors for every file in the repo, not just open ones.
+    "python.pyrefly.diagnosticMode": "workspace",
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "always",
+        },
+    },
+    "files.associations": {
+        "justfile": "just",
+    },
 }
