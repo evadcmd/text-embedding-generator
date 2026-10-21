@@ -4,6 +4,7 @@ lgtm := "shared"
 compose := "docker compose -f compose.yaml -f compose.lgtm-" + lgtm + ".yaml"
 
 dev:
+    mkdir -p .log
     uv run uvicorn teg.main:api --reload --app-dir src --log-config log.ini
 test:
     uv run pytest --cov=teg -s tests/
