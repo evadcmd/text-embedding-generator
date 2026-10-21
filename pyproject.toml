@@ -15,7 +15,7 @@ dependencies = [
     "opentelemetry-sdk>=1.44.0",
     "prometheus-fastapi-instrumentator>=7.1.0",
     "python-json-logger>=4.2.0",
-    "sentence-transformers>=3.0.0",
+    "sentence-transformers>=6.2.0",
     "torch>=2.11.0",
     "transformers>=5.5.0",
 ]
