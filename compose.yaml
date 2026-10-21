@@ -14,6 +14,7 @@ services:
       # (compose.lgtm-shared.yaml); otherwise point this at another LGTM.
       OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://lgtm:4318}
     volumes:
-      # Bind mount (like taruza) so WARNING+ logs from Docker and from
-      # `just dev` end up in the same ./.log directory.
-      - ./.log:/opt/text-embedding-generator/.log
+      - teg-log:/app/.log
+
+volumes:
+  teg-log:
