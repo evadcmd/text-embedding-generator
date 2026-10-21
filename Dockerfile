@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.13
-ARG PYTHON_IMAGE=${PYTHON_VERSION}-slim
+ARG PYTHON_IMAGE=python:${PYTHON_VERSION}-slim
 
 FROM ${PYTHON_IMAGE} AS builder
 COPY --from=ghcr.io/astral-sh/uv:0.12 /uv /bin/uv
@@ -20,10 +20,9 @@ FROM ${PYTHON_IMAGE} AS teg-api
 
 ARG UID=1000
 ARG GID=1000
-ARG USER=app
 ARG APP_DIR=/app
-RUN groupadd --gid=${GID} {USER} \
-    && useradd --uid=${UID} --gid=app --create-home ${APP_DIR} \
+RUN groupadd --gid=${GID} app \
+    && useradd --uid=${UID} --gid=app --create-home app \
     && mkdir -p ${APP_DIR}/.log \
     && chown -R app:app ${APP_DIR}
 
@@ -35,7 +34,7 @@ WORKDIR ${APP_DIR}
 COPY --chown=app:app Qwen3-Embedding-0.6B/ Qwen3-Embedding-0.6B/
 COPY --chown=app:app log.ini ./
 
-USER ${USER}
+USER app
 # only site-packages is copied over, not .venv/bin, so there's no uvicorn script on PATH
 # don't buffer stdout logs
 ENV PYTHONUNBUFFERED=1
