@@ -15,6 +15,13 @@ services:
       OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://lgtm:4318}
     volumes:
       - teg-log:/app/.log
+    networks:
+      - default
+      - teg-net
 
 volumes:
   teg-log:
+
+networks:
+  teg-net:
+    name: teg-net
