@@ -22,7 +22,7 @@ jobs:
         with:
           enable-cache: true
           # match the Dockerfile; torch has no wheels for the newest CPython yet
-          python-version: "3.13"
+          python-version: "3.14"
 
       - name: Install dependencies
         id: sync
