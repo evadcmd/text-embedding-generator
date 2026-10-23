@@ -8,6 +8,8 @@ ENV UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
     UV_PROJECT_ENVIRONMENT=/usr/local
 
+WORKDIR /build
+
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev --no-install-project --inexact
 
